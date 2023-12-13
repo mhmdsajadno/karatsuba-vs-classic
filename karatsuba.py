@@ -1,4 +1,5 @@
 import numpy as np
+import timeit
 
 def classic(a,b):
     MAX_DIGITS = max(len(a),len(b))
@@ -12,9 +13,9 @@ def classic(a,b):
 
     product_size = MAX_DIGITS * 2 - 1
     
-    for i in range(product_size, -1, -1):
-        print(product[i], end="")
-    print()
+    # for i in range(product_size, -1, -1):
+    #     print(product[i], end="")
+    # print()
 
 
 def karatsuba(x, y):
@@ -37,7 +38,16 @@ def karatsuba(x, y):
         return ac * (10 ** (2 * mid)) + (ad_plus_bc * (10 ** mid)) + bd
     
 if __name__ == "__main__":
-    x = [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
-    y = [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
-    print(karatsuba(x,y))
-    classic(x,y)
+    print('\n')
+    x = [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
+    y = [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
+    print(f"Array len is: {len(x)}")
+
+    # Time the classic multiplication algorithm
+    classic_time = timeit.timeit("classic(x, y)", globals=globals(), number=1)
+    print("Classic multiplication time:", classic_time)
+    
+    # Time the Karatsuba algorithm
+    karatsuba_time = timeit.timeit("karatsuba(x, y)", globals=globals(), number=1)
+    print("Karatsuba multiplication time:", karatsuba_time)
+    print('\n')
